@@ -24,7 +24,7 @@ public class IPhonesStoresEntityManager implements EntityManagerInterface<IPhone
         return null;
     }
 
-    public IPhonesStores update(IPhonesStores dto) {
+    public IPhonesStores update(IPhonesStores dto, int id) {
         return null;
     }
 

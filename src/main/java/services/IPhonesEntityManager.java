@@ -19,15 +19,37 @@ public class IPhonesEntityManager implements EntityManagerInterface<IPhones>{
 
     }
     public IPhones findById(int id) {
-        return null;
+        return entitymanager.find(IPhones.class, id);
+
     }
 
     public List<IPhones> findAll() {
         return null;
     }
 
-    public IPhones update(IPhones dto) {
-        return null;
+    public IPhones update(IPhones iPhone, int id) {
+        try {
+
+            IPhones old = entitymanager.find(IPhones.class, id);
+
+            old.setName(iPhone.getName());
+            old.setCost(iPhone.getCost());
+            old.setFingerprint(iPhone.getFingerprint());
+            old.setYear_released(iPhone.getYear_released());
+            old.setSize(iPhone.getSize());
+
+            entitymanager.getTransaction().begin();
+            entitymanager.persist(old);
+            entitymanager.getTransaction().commit();
+
+            entitymanager.close();
+            emFactory.close();
+
+            return iPhone;
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public IPhones create(IPhones iPhone) {
